@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Game Development Company</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lovelo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Lovelo', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+        }
+
+        .content {
+            text-align: center;
+            max-width: 800px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .navbar {
+            position: fixed;
+            bottom: 30px;
+            width: auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background-color: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .navbar:hover {
+            background-color: rgba(30, 30, 30, 1);
+            box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar a {
+            text-decoration: none;
+            font-size: 1.2em;
+            color: #f0f0f0;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: var(--text-hover-light);
+        }
+
+        .navbar a:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-color);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar a:hover:after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .projects-section {
+            width: 100%;
+            max-width: 1000px;
+            padding: 50px 20px;
+            margin-top: 50px;
+            opacity: 0;
+            transform: translateY(30px);
+            display: none;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .project {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .section-title h1 {
+            margin: 0;
+            font-size: 2em;
+            color: var(--accent-color);
+        }
+
+        .project p {
+            margin: 10px 0 20px;
+            font-size: 1.1em;
+        }
+
+        .language-tags {
+            display: flex;
+            gap: 10px;
+        }
+
+        .language-tag {
+            background-color: #444;
+            color: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+
+        .language-tag:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Light and Dark Mode Styles */
+        :root {
+            --background-color-light: #1e66f5;
+            --background-color-dark: #121212;
+            --text-color-light: #ffffff;
+            --text-color-dark: #f0f0f0;
+            --navbar-background-light: rgb(25, 89, 217);
+            --navbar-background-dark: rgba(30, 30, 30, 0.8);
+            --navbar-text-light: rgba(175, 231, 255, 0.8);
+            --accent-color: #00bcd4;
+            --text-hover-light: #ffffff;;
+        }
+
+        body.light-mode {
+            background-color: var(--background-color-light);
+            color: var(--text-color-light);
+        }
+
+        body.dark-mode {
+            background-color: var(--background-color-dark);
+            color: var(--text-color-dark);
+        }
+
+        .navbar.light-mode {
+            background-color: var(--navbar-background-light);
+        }
+
+        .navbar.dark-mode {
+            background-color: var(--navbar-background-dark);
+        }
+
+        .toggle-button:hover {
+            background-color: #0097a7;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body class="dark-mode">
+
+
+    <div class="content" id="welcome-content">
+        <h1>Welcome to Your Game Development Company</h1>
+        <p>Crafting immersive experiences for gamers worldwide.</p>
+    </div>
+
+    <div class="navbar dark-mode">
+        <a href="main.html">Home</a>
+        <a href="#" onclick="showProjects()">Projects</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <div id="projects-section" class="projects-section">
+        <div class="section-title">
+            <h1>Projects</h1> 
+        </div>
+        <p>Here is a list of all of our projects!</p>
+        <br>
+        <div class="project">
+            <h2>Shaytris</h2>
+            <p>Our flagship game, a FOSS Tetris client, with multiplayer, chat, friends list and more!</p>
+            <div class="language-tags">
+                <div class="language-tag">TypeScript</div>
+                <div class="language-tag">Ruby</div>
+                <div class="language-tag">Swift</div>
+                <div class="language-tag">Java</div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMode() {
+            const body = document.body;
+            const navbar = document.querySelector('.navbar');
+            const toggleButton = document.querySelector('.toggle-button');
+
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                navbar.classList.remove('dark-mode');
+                navbar.classList.add('light-mode');
+                toggleButton.textContent = 'Dark Mode';
+            } else {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                navbar.classList.remove('light-mode');
+                navbar.classList.add('dark-mode');
+                toggleButton.textContent = 'Light Mode';
+            }
+        }
+
+        function showProjects() {
+            const welcomeContent = document.getElementById('welcome-content');
+            const projectsSection = document.getElementById('projects-section');
+
+            // Hide the welcome content
+            welcomeContent.style.opacity = '0';
+            welcomeContent.style.transform = 'translateY(-20px)';
+
+            // Show the projects section after the welcome content hides
+            setTimeout(() => {
+                welcomeContent.style.display = 'none';
+                projectsSection.style.display = 'block';
+
+                setTimeout(() => {
+                    projectsSection.style.opacity = '1';
+                    projectsSection.style.transform = 'translateY(0)';
+                }, 10);
+            }, 500);
+        }
+    </script>
+
+</body>
+</html>
